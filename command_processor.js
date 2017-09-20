@@ -1,4 +1,4 @@
-define(['jquery', 'screen', 'command_history'], function ($, screen, history) {
+define(['jquery', 'screen', 'command_history', 'terminal'], function ($, screen, history) {
 
     var CommandProcessor = function () {
 
@@ -58,7 +58,7 @@ define(['jquery', 'screen', 'command_history'], function ($, screen, history) {
             } else {
                 eval('this.' + functionToCall + '("' + commandArguments + '")');
             }
-
+            console.log(command)
             this.performCallbackWhenReady(callback);
         },
 
@@ -90,7 +90,8 @@ define(['jquery', 'screen', 'command_history'], function ($, screen, history) {
 
         cmd_cd: function (args) {
             var firstChar = args.length > 0 ? args.charAt(0):'';
-            var baseUrl = "//ashton.codes";
+            // var baseUrl = "//ashton.codes";
+            console.log(args, firstChar)
 
             // @TODO - doesn't seem to work properly
             if (
@@ -100,14 +101,19 @@ define(['jquery', 'screen', 'command_history'], function ($, screen, history) {
                 firstChar === '.'  ||
                 firstChar === '~'
                 ) {
-                window.top.location.href = baseUrl;
+                terminal.welcome();
+            }
+            else {
+                console.log(args)
+                this.cmd_clear(args)
             }
 
-            window.top.location.href = baseUrl + '/' + args;
+            // window.top.location.href = baseUrl + '/' + args;
         },
 
         cmd_clear: function (args) {
-            screen.clear();
+            console.log(args)
+            screen.clear(args);
         },
 
         cmd_finger: function (args) {
@@ -131,7 +137,7 @@ define(['jquery', 'screen', 'command_history'], function ($, screen, history) {
         },
 
         cmd_ls: function (args) {
-            screen.stdout("<ul class='terminal__list'><li>about</li><li>blog</li><li>portfolio</li><li>contact</li></ul>");
+            screen.stdout("<ul class='terminal__list'><li>about</li><li>blog</li><li>contact</li></ul>");
         },
 
         cmd_cmds: function () {
@@ -150,7 +156,7 @@ define(['jquery', 'screen', 'command_history'], function ($, screen, history) {
             var descriptions = {
                 "about":     "Find out more about Chris Ashton.",
                 "blog":      "Read some of my thoughts, tech-related or otherwise.",
-                "portfolio": "See some of my lovely websites and applications.",
+                // "portfolio": "See some of my lovely websites and applications.",
                 "contact":   "Send me a message!"
             };
 
@@ -193,8 +199,7 @@ define(['jquery', 'screen', 'command_history'], function ($, screen, history) {
         },
 
         help: function () {
-            screen.stdout("Try typing `ls` to list the pages available, then redirect to a page by typing, for example, `cd about`. You can pull up this terminal on any page with SHIFT+T.");
-            screen.stdout("For a full list of recognised commands, type `commands`. Have fun!");
+            screen.stdout("Try typing `ls` to list the pages available, then redirect to a page by typing, for example, `cd about`. Type `commands`. Have fun!");
         }
     };
 

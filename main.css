@@ -9,7 +9,7 @@ body {
 
 .terminal {
     position: relative;
-    color: white;
+    color: rgba(0, 255, 0, 1);
     font-family: 'courier new', courier, serif;
     font-size: 13px;
     word-break: break-word;
@@ -35,6 +35,7 @@ body {
     font-family: 'courier new', courier, serif;
     font-size: 14px;
     height: 29px;
+    outline: none;
 }
 
 .terminal__list {

@@ -10,6 +10,7 @@ define(['jquery'], function ($) {
         },
 
         outputToTerminal: function (type, contents) {
+            console.log(type, contents)
             this.output.append('<p class="' + type +'">' + contents + '</p>');
         },
 
@@ -21,10 +22,24 @@ define(['jquery'], function ($) {
             this.outputToTerminal('terminal__error', output);
         },
 
-        prompt: function () {
-            var prompt = '<font color="lime">guest</font> in <font color="yellow">/</font>';
-            this.outputToTerminal('terminal__prompt', prompt);
-            this.scrollToCursor();
+        prompt: function (cmd) {
+            if (cmd) {
+                var command = cmd.split(' ');
+                switch(command[1]) {
+                    case "about":
+                    var directory = command[1];
+                    break;
+                    case "blog":
+                    var directory = command[1];
+                    break;
+                    default:
+                    var directory = "";
+                }
+                var prompt = '<font color="white">guest</font> in <font color="white">/'+directory+'</font>';
+                this.outputToTerminal('terminal__prompt', prompt);
+                this.scrollToCursor();
+            }
+
         },
 
         scrollToCursor: function () {
@@ -39,8 +54,27 @@ define(['jquery'], function ($) {
             this.output.css('max-height', height);
         },
 
-        clear: function () {
-            this.output.html('');
+        clear: function (args) {
+            console.log(args)
+            if (args === ''){
+                this.output.html('');
+            }
+            else {
+                this.myPage(args);
+            }
+        },
+
+        myPage: function (page){
+            switch(page) {
+                case "about":
+                    this.output.html('type "cd ../" and press return to go back');
+                    break;
+                case "contact":
+                    this.output.html('contact');
+                    break;
+                default:
+                    this.output.html('You are looking for something you should not!');
+            }
         }
     };
 

@@ -44,17 +44,18 @@ define(['jquery', 'command_processor', 'screen'], function ($, command, screen) 
 
         processCommand: function () {
             var cmd = command.clean(this.input.val());
+            console.log(cmd)
             this.input.val('');
             screen.stdout('$ ' + cmd);
             command.process(cmd, function () {
-                screen.prompt();
+                screen.prompt(cmd);
             });
         },
 
         welcome: function () {
-            screen.stdout("Welcome to Chris Ashton's terminal.");
-            screen.stdout("Don't know where to begin? Try typing `help` into the terminal, then hit Return.");
-            screen.stdout("===================================");
+            screen.stdout("Dhruv Nenwani's terminal.");
+            screen.stdout("Try typing `help` into the terminal, then hit Return");
+            screen.stdout(".....................................................");
             screen.prompt();
         }
     };
