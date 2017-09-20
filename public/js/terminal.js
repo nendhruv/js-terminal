@@ -1,4 +1,4 @@
-define(['jquery', 'command_processor', 'screen'], function ($, command, screen) {
+define(['jquery', 'js/command_processor', 'js/screen'], function ($, command, screen) {
 
     var Terminal = function () {
 

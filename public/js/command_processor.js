@@ -1,4 +1,4 @@
-define(['jquery', 'screen', 'command_history', 'terminal'], function ($, screen, history) {
+define(['jquery', 'js/screen', 'js/command_history', 'js/terminal'], function ($, screen, history) {
 
     var CommandProcessor = function () {
 
